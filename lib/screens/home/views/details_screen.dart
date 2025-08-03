@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pizza_repository/pizza_repository.dart';
 import '../../../components/macro.dart';
+import '../../../components/pizza_image.dart';
 
 class DetailsScreen extends StatelessWidget {
   final Pizza pizza;
@@ -16,8 +17,9 @@ class DetailsScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          children: [
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
             Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.width - (40),
@@ -31,11 +33,14 @@ class DetailsScreen extends StatelessWidget {
                     blurRadius: 5
                   )
                 ],
-                image: DecorationImage(
-                  image: NetworkImage(
-                    pizza.picture
-                  )
-                )
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(30),
+                child: PizzaImage(
+                  imageUrl: pizza.picture,
+                  width: double.infinity,
+                  height: double.infinity,
+                ),
               ),
             ),
             const SizedBox(height: 30,),
@@ -156,7 +161,8 @@ class DetailsScreen extends StatelessWidget {
                 ),
               ),
             )
-          ],
+            ],
+          ),
         ),
       ),
     );
